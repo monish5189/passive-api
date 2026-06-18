@@ -119,7 +119,6 @@ body{font-family:Arial;background:#0f172a;color:white;text-align:center;padding:
 </body>
 </html>
 """)
-@app.get("/health", tags=["Free"])
 @app.get("/emi", tags=["Tools"])
 async def emi_page():
     return HTMLResponse("""
