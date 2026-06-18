@@ -53,6 +53,8 @@ from typing import Optional, List
 import httpx
 from fastapi import FastAPI, Query, HTTPException
 from fastapi.responses import JSONResponse, HTMLResponse, FileResponse
+from app.routes.finance import router as finance_router
+from app.routes.student import router as student_router
 from PIL import Image
 
 # ── x402 payment middleware ──────────────────────────────────────────────────
@@ -79,6 +81,9 @@ app = FastAPI(
     version="2.0.0",
 
 )
+app.include_router(finance_router)
+app.include_router(student_router)
+
 
 if X402_AVAILABLE:
     init_x402(app, pay_to=YOUR_WALLET, network=NETWORK)
@@ -88,37 +93,9 @@ if X402_AVAILABLE:
 # FREE — Root / Discovery
 # ═══════════════════════════════════════════════════════════════════════════════
 @app.get("/", tags=["Free"])
-@app.get("/", tags=["Free"])
 async def root():
-    return HTMLResponse("""
-<!DOCTYPE html>
-<html>
-<head>
-<title>Passive Income API</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body{font-family:Arial;background:#0f172a;color:white;text-align:center;padding:20px;}
-.card{background:#1e293b;padding:20px;border-radius:12px;max-width:700px;margin:auto;}
-.btn{display:inline-block;padding:12px 20px;margin:10px;border-radius:8px;background:#2563eb;color:white;text-decoration:none;}
-</style>
-</head>
-<body>
-<h1>🚀 Passive Income API</h1>
-<p>44+ APIs for Finance, Business, Crypto, Weather and Utilities</p>
-<div class="card">
-<h2>Featured APIs</h2>
-<p>💰 EMI Calculator</p>
-<p>📈 SIP Calculator</p>
-<p>🧾 GST Calculator</p>
-<p>₿ Crypto Prices</p>
-<p>🌦 Weather Forecast</p>
-<p>📱 QR Generator</p>
-</div>
-<a class="btn" href="/docs">View API Docs</a>
-<a class="btn" href="https://github.com/monish5189/passive-api">GitHub</a>
-</body>
-</html>
-""")
+    return FileResponse("templates/home.html")
+
 @app.get("/emi", tags=["Tools"])
 async def emi_page():
     return FileResponse("templates/emi.html")
