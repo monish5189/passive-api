@@ -4,3 +4,4 @@ httpx
 pillow
 fastapi-x402
 python-dotenv
+qrcode[pil]
