@@ -1,0 +1,29 @@
+{
+  "x402Version": 2,
+  "name": "Passive Income API",
+  "description": "Engineering tools API: geometry, image analysis, unit conversion",
+  "endpoints": [
+    {
+      "path": "/api/geometry",
+      "method": "GET",
+      "description": "Ball/projectile trajectory simulator with wall bounces",
+      "price": "$0.005",
+      "network": "base"
+    },
+    {
+      "path": "/api/image-analyze",
+      "method": "GET",
+      "description": "Image brightness and dominant color analysis",
+      "price": "$0.01",
+      "network": "base"
+    },
+    {
+      "path": "/api/unit-convert",
+      "method": "GET",
+      "description": "Naval and engineering unit conversions (pressure, speed, power, torque)",
+      "price": "$0.003",
+      "network": "base"
+    }
+  ],
+  "contact": "your-email@example.com"
+}
