@@ -1025,3 +1025,27 @@ async def science_constants(
             f"Unknown constant '{name}'. Available: {sorted(CONSTANTS.keys())}"
         )
     return {"name": key, **CONSTANTS[key]}
+
+@app.get("/api/loan-emi", tags=["Finance"])
+async def loan_emi(
+    principal: float,
+    annual_rate: float,
+    years: int
+):
+    monthly_rate = annual_rate / 12 / 100
+    months = years * 12
+
+    emi = (
+        principal
+        * monthly_rate
+        * (1 + monthly_rate) ** months
+    ) / (
+        (1 + monthly_rate) ** months - 1
+    )
+
+    return {
+        "principal": principal,
+        "annual_rate": annual_rate,
+        "years": years,
+        "emi": round(emi, 2)
+    }
