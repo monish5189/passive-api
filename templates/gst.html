@@ -1,1 +1,79 @@
-<!DOCTYPE html><html><head><title>gst</title><meta name='viewport' content='width=device-width,initial-scale=1'><style>body{font-family:Arial;background:#0f172a;color:white;text-align:center;padding:20px}.card{background:#1e293b;padding:20px;border-radius:12px;max-width:600px;margin:auto}.btn{display:inline-block;padding:12px 20px;background:#2563eb;color:white;text-decoration:none;border-radius:8px}</style></head><body><div class='card'><h1>GST</h1><p>Frontend page ready.</p><p>Backend API exists.</p><a class='btn' href='/docs'>Open API Docs</a></div></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+<title>GST Calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+    font-family:Arial;
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+.card{
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+    max-width:500px;
+    margin:auto;
+}
+input{
+    width:90%;
+    padding:12px;
+    margin:10px;
+    border:none;
+    border-radius:8px;
+}
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    background:#2563eb;
+    color:white;
+}
+.result{
+    margin-top:20px;
+    font-size:18px;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+<h1>🧾 GST Calculator</h1>
+
+<input id="amount" type="number" placeholder="Amount">
+
+<input id="gst" type="number" value="18" placeholder="GST %">
+
+<br>
+
+<button onclick="calculateGST()">Calculate</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<script>
+async function calculateGST() {
+
+    let amount = document.getElementById('amount').value;
+    let gst = document.getElementById('gst').value;
+
+    let res = await fetch(
+        `/api/gst-calculator?amount=${amount}&gst_rate=${gst}`
+    );
+
+    let data = await res.json();
+
+    document.getElementById('result').innerHTML = `
+        <p>GST Amount: ₹${data.gst_amount}</p>
+        <p>Total Amount: ₹${data.total_amount}</p>
+    `;
+}
+</script>
+
+</body>
+</html>
