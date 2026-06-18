@@ -91,22 +91,79 @@ async def root():
     return {
         "name": "Passive Income API",
         "version": "2.0.0",
-        "total_endpoints": 23,
+        "total_endpoints": 44,
         "network": NETWORK,
         "pay_to": YOUR_WALLET,
         "categories": {
-            "original": ["/api/geometry", "/api/image-analyze", "/api/unit-convert"],
-            "finance":  ["/api/crypto/price", "/api/crypto/top", "/api/crypto/trending",
-                         "/api/forex/rates", "/api/stock/summary"],
-            "weather":  ["/api/weather/current", "/api/weather/forecast"],
-            "geo":      ["/api/geo/ip-lookup", "/api/geo/geocode", "/api/geo/timezone"],
-            "web_tools":["/api/web/screenshot-info", "/api/web/dns-lookup",
-                         "/api/web/ssl-check", "/api/web/url-expand"],
-            "text":     ["/api/text/word-count", "/api/text/hash",
-                         "/api/text/lorem", "/api/text/password-gen"],
-            "math":     ["/api/math/compound-interest", "/api/math/statistics",
-                         "/api/math/bmi", "/api/science/constants"],
-        },
+    "original": [
+        "/api/geometry",
+        "/api/image-analyze",
+        "/api/unit-convert"
+    ],
+
+    "finance": [
+        "/api/crypto/price",
+        "/api/crypto/top",
+        "/api/crypto/trending",
+        "/api/forex/rates",
+        "/api/stock/summary",
+        "/api/loan-emi",
+        "/api/gst-calculator",
+        "/api/roi-calculator",
+        "/api/net-worth",
+        "/api/loan-affordability",
+        "/api/sip-calculator"
+    ],
+
+    "business": [
+        "/api/profit-margin",
+        "/api/break-even",
+        "/api/business-days"
+    ],
+
+    "weather": [
+        "/api/weather/current",
+        "/api/weather/forecast"
+    ],
+
+    "geo": [
+        "/api/geo/ip-lookup",
+        "/api/geo/geocode",
+        "/api/geo/timezone"
+    ],
+
+    "web_tools": [
+        "/api/web/screenshot-info",
+        "/api/web/dns-lookup",
+        "/api/web/ssl-check",
+        "/api/web/url-expand"
+    ],
+
+    "text": [
+        "/api/text/word-count",
+        "/api/text/hash",
+        "/api/text/lorem",
+        "/api/text/password-gen",
+        "/api/email-validator"
+    ],
+
+    "utilities": [
+        "/api/qr-generator",
+        "/api/password-strength",
+        "/api/uuid-generator",
+        "/api/currency-format",
+        "/api/fuel-cost",
+        "/api/age-calculator"
+    ],
+
+    "math": [
+        "/api/math/compound-interest",
+        "/api/math/statistics",
+        "/api/math/bmi",
+        "/api/science/constants",
+        "/api/compound-interest-advanced"
+    ]
+},
         "docs": "/docs",
         "discovery": "/.well-known/x402.json",
     }
