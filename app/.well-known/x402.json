@@ -1,29 +1,39 @@
 {
   "x402Version": 2,
   "name": "Passive Income API",
-  "description": "Engineering tools API: geometry, image analysis, unit conversion",
+  "description": "Finance, Weather, Geo, Web Tools, Text and Engineering APIs",
   "endpoints": [
-    {
-      "path": "/api/geometry",
-      "method": "GET",
-      "description": "Ball/projectile trajectory simulator with wall bounces",
-      "price": "$0.005",
-      "network": "base"
-    },
-    {
-      "path": "/api/image-analyze",
-      "method": "GET",
-      "description": "Image brightness and dominant color analysis",
-      "price": "$0.01",
-      "network": "base"
-    },
-    {
-      "path": "/api/unit-convert",
-      "method": "GET",
-      "description": "Naval and engineering unit conversions (pressure, speed, power, torque)",
-      "price": "$0.003",
-      "network": "base"
-    }
+    {"path":"/api/geometry","method":"GET","price":"$0.005"},
+    {"path":"/api/image-analyze","method":"GET","price":"$0.01"},
+    {"path":"/api/unit-convert","method":"GET","price":"$0.003"},
+
+    {"path":"/api/crypto/price","method":"GET","price":"$0.005"},
+    {"path":"/api/crypto/top","method":"GET","price":"$0.003"},
+    {"path":"/api/crypto/trending","method":"GET","price":"$0.003"},
+    {"path":"/api/forex/rates","method":"GET","price":"$0.003"},
+    {"path":"/api/stock/summary","method":"GET","price":"$0.005"},
+
+    {"path":"/api/weather/current","method":"GET","price":"$0.003"},
+    {"path":"/api/weather/forecast","method":"GET","price":"$0.005"},
+
+    {"path":"/api/geo/ip-lookup","method":"GET","price":"$0.003"},
+    {"path":"/api/geo/geocode","method":"GET","price":"$0.003"},
+    {"path":"/api/geo/timezone","method":"GET","price":"$0.003"},
+
+    {"path":"/api/web/screenshot-info","method":"GET","price":"$0.01"},
+    {"path":"/api/web/dns-lookup","method":"GET","price":"$0.003"},
+    {"path":"/api/web/ssl-check","method":"GET","price":"$0.003"},
+    {"path":"/api/web/url-expand","method":"GET","price":"$0.003"},
+
+    {"path":"/api/text/word-count","method":"GET","price":"$0.002"},
+    {"path":"/api/text/hash","method":"GET","price":"$0.002"},
+    {"path":"/api/text/lorem","method":"GET","price":"$0.002"},
+    {"path":"/api/text/password-gen","method":"GET","price":"$0.003"},
+
+    {"path":"/api/math/compound-interest","method":"GET","price":"$0.005"},
+    {"path":"/api/math/statistics","method":"GET","price":"$0.005"},
+    {"path":"/api/math/bmi","method":"GET","price":"$0.003"},
+    {"path":"/api/science/constants","method":"GET","price":"$0.002"}
   ],
-  "contact": "your-email@example.com"
+  "contact":"monish5189@github"
 }
