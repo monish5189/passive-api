@@ -1,7 +1,7 @@
 """
 Passive Income API Server  —  v2.0
 ===================================
-23 paid endpoints using x402 micropayments (USDC on Base).
+44 paid endpoints using x402 micropayments (USDC on Base).
 Each API call earns USDC directly to your wallet. No middlemen.
 
 ORIGINAL (3):
@@ -71,12 +71,13 @@ YOUR_WALLET = os.getenv("PAY_TO_ADDRESS", "0xYOUR_WALLET_ADDRESS_HERE")
 NETWORK     = os.getenv("X402_NETWORK",  "base-sepolia")
 
 app = FastAPI(
-    title="Passive Income API  — 23 Endpoints",
+    title="Passive Income API — 44 Endpoints",
     description=(
         "Pay-per-call API using x402 USDC micropayments on Base. "
-        "23 endpoints across finance, weather, geo, web tools, text & math."
+        "44 endpoints across finance, business, utilities, weather, geo, web tools, text, engineering and math."
     ),
     version="2.0.0",
+
 )
 
 if X402_AVAILABLE:
