@@ -1172,3 +1172,65 @@ async def uuid_generator():
         "uuid": str(uuid.uuid4())
     }
 
+from datetime import datetime, timedelta
+
+@app.get("/api/business-days", tags=["Business"])
+async def business_days(start_date: str, end_date: str):
+    start = datetime.strptime(start_date, "%Y-%m-%d")
+    end = datetime.strptime(end_date, "%Y-%m-%d")
+
+    count = 0
+    current = start
+
+    while current <= end:
+        if current.weekday() < 5:
+            count += 1
+        current += timedelta(days=1)
+
+    return {
+        "start": start_date,
+        "end": end_date,
+        "business_days": count
+    }
+
+@app.get("/api/break-even", tags=["Business"])
+async def break_even(
+    fixed_cost: float,
+    selling_price: float,
+    variable_cost: float
+):
+    units = fixed_cost / (selling_price - variable_cost)
+
+    return {
+        "break_even_units": round(units, 2)
+    }
+
+@app.get("/api/net-worth", tags=["Finance"])
+async def net_worth(
+    assets: float,
+    liabilities: float
+):
+    return {
+        "assets": assets,
+        "liabilities": liabilities,
+        "net_worth": round(assets - liabilities, 2)
+    }
+
+@app.get("/api/compound-interest-advanced", tags=["Finance"])
+async def compound_interest_advanced(
+    principal: float,
+    rate: float,
+    years: float,
+    compounds_per_year: int = 12
+):
+    amount = principal * (
+        1 + rate/100/compounds_per_year
+    ) ** (compounds_per_year * years)
+
+    return {
+        "principal": principal,
+        "final_amount": round(amount, 2),
+        "interest_earned": round(amount - principal, 2)
+    }
+
+
