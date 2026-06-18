@@ -1115,3 +1115,60 @@ async def qr_generator(text: str):
         buf,
         media_type="image/png"
     )
+from datetime import date
+
+@app.get("/api/age-calculator", tags=["Utilities"])
+async def age_calculator(
+    birth_year: int,
+    birth_month: int,
+    birth_day: int
+):
+    today = date.today()
+    born = date(birth_year, birth_month, birth_day)
+
+    age = today.year - born.year - (
+        (today.month, today.day) < (born.month, born.day)
+    )
+
+    return {
+        "birth_date": str(born),
+        "age": age
+    }
+
+@app.get("/api/password-strength", tags=["Utilities"])
+async def password_strength(password: str):
+    score = 0
+
+    if len(password) >= 8:
+        score += 1
+    if any(c.isupper() for c in password):
+        score += 1
+    if any(c.islower() for c in password):
+        score += 1
+    if any(c.isdigit() for c in password):
+        score += 1
+    if any(not c.isalnum() for c in password):
+        score += 1
+
+    levels = {
+        0: "Very Weak",
+        1: "Weak",
+        2: "Fair",
+        3: "Good",
+        4: "Strong",
+        5: "Very Strong"
+    }
+
+    return {
+        "score": score,
+        "strength": levels[score]
+    }
+
+import uuid
+
+@app.get("/api/uuid-generator", tags=["Utilities"])
+async def uuid_generator():
+    return {
+        "uuid": str(uuid.uuid4())
+    }
+
