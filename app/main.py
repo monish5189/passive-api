@@ -52,7 +52,7 @@ from typing import Optional, List
 
 import httpx
 from fastapi import FastAPI, Query, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
 from PIL import Image
 
 # ── x402 payment middleware ──────────────────────────────────────────────────
@@ -88,87 +88,37 @@ if X402_AVAILABLE:
 # FREE — Root / Discovery
 # ═══════════════════════════════════════════════════════════════════════════════
 @app.get("/", tags=["Free"])
+@app.get("/", tags=["Free"])
 async def root():
-    return {
-        "name": "Passive Income API",
-        "version": "2.0.0",
-        "total_endpoints": 44,
-        "network": NETWORK,
-        "pay_to": YOUR_WALLET,
-        "categories": {
-    "original": [
-        "/api/geometry",
-        "/api/image-analyze",
-        "/api/unit-convert"
-    ],
-
-    "finance": [
-        "/api/crypto/price",
-        "/api/crypto/top",
-        "/api/crypto/trending",
-        "/api/forex/rates",
-        "/api/stock/summary",
-        "/api/loan-emi",
-        "/api/gst-calculator",
-        "/api/roi-calculator",
-        "/api/net-worth",
-        "/api/loan-affordability",
-        "/api/sip-calculator"
-    ],
-
-    "business": [
-        "/api/profit-margin",
-        "/api/break-even",
-        "/api/business-days"
-    ],
-
-    "weather": [
-        "/api/weather/current",
-        "/api/weather/forecast"
-    ],
-
-    "geo": [
-        "/api/geo/ip-lookup",
-        "/api/geo/geocode",
-        "/api/geo/timezone"
-    ],
-
-    "web_tools": [
-        "/api/web/screenshot-info",
-        "/api/web/dns-lookup",
-        "/api/web/ssl-check",
-        "/api/web/url-expand"
-    ],
-
-    "text": [
-        "/api/text/word-count",
-        "/api/text/hash",
-        "/api/text/lorem",
-        "/api/text/password-gen",
-        "/api/email-validator"
-    ],
-
-    "utilities": [
-        "/api/qr-generator",
-        "/api/password-strength",
-        "/api/uuid-generator",
-        "/api/currency-format",
-        "/api/fuel-cost",
-        "/api/age-calculator"
-    ],
-
-    "math": [
-        "/api/math/compound-interest",
-        "/api/math/statistics",
-        "/api/math/bmi",
-        "/api/science/constants",
-        "/api/compound-interest-advanced"
-    ]
-},
-        "docs": "/docs",
-        "discovery": "/.well-known/x402.json",
-    }
-
+    return HTMLResponse("""
+<!DOCTYPE html>
+<html>
+<head>
+<title>Passive Income API</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:Arial;background:#0f172a;color:white;text-align:center;padding:20px;}
+.card{background:#1e293b;padding:20px;border-radius:12px;max-width:700px;margin:auto;}
+.btn{display:inline-block;padding:12px 20px;margin:10px;border-radius:8px;background:#2563eb;color:white;text-decoration:none;}
+</style>
+</head>
+<body>
+<h1>🚀 Passive Income API</h1>
+<p>44+ APIs for Finance, Business, Crypto, Weather and Utilities</p>
+<div class="card">
+<h2>Featured APIs</h2>
+<p>💰 EMI Calculator</p>
+<p>📈 SIP Calculator</p>
+<p>🧾 GST Calculator</p>
+<p>₿ Crypto Prices</p>
+<p>🌦 Weather Forecast</p>
+<p>📱 QR Generator</p>
+</div>
+<a class="btn" href="/docs">View API Docs</a>
+<a class="btn" href="https://github.com/monish5189/passive-api">GitHub</a>
+</body>
+</html>
+""")
 @app.get("/health", tags=["Free"])
 async def health():
     return {"status": "ok", "time": datetime.now(timezone.utc).isoformat()}
