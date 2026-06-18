@@ -1,1 +1,86 @@
-<!DOCTYPE html><html><head><title>sip</title><meta name='viewport' content='width=device-width,initial-scale=1'><style>body{font-family:Arial;background:#0f172a;color:white;text-align:center;padding:20px}.card{background:#1e293b;padding:20px;border-radius:12px;max-width:600px;margin:auto}.btn{display:inline-block;padding:12px 20px;background:#2563eb;color:white;text-decoration:none;border-radius:8px}</style></head><body><div class='card'><h1>SIP</h1><p>Frontend page ready.</p><p>Backend API exists.</p><a class='btn' href='/docs'>Open API Docs</a></div></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+<title>SIP Calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+    font-family:Arial;
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+.card{
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+    max-width:500px;
+    margin:auto;
+}
+input{
+    width:90%;
+    padding:12px;
+    margin:10px;
+    border:none;
+    border-radius:8px;
+}
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    background:#2563eb;
+    color:white;
+}
+.result{
+    margin-top:20px;
+    font-size:18px;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+<h1>📈 SIP Calculator</h1>
+
+<input id="monthly" type="number" placeholder="Monthly Investment">
+
+<input id="return" type="number" placeholder="Annual Return %" value="12">
+
+<input id="years" type="number" placeholder="Years" value="10">
+
+<br>
+
+<button onclick="calculateSIP()">Calculate</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<script>
+async function calculateSIP(){
+
+    let monthly = document.getElementById('monthly').value;
+    let annualReturn = document.getElementById('return').value;
+    let years = document.getElementById('years').value;
+
+    let res = await fetch(
+        `/api/sip-calculator?monthly_investment=${monthly}&annual_return=${annualReturn}&years=${years}`
+    );
+
+    let data = await res.json();
+
+    let invested = monthly * 12 * years;
+    let profit = data.future_value - invested;
+
+    document.getElementById('result').innerHTML = `
+        <p>Invested Amount: ₹${Number(invested).toFixed(2)}</p>
+        <p>Profit: ₹${profit.toFixed(2)}</p>
+        <p><b>Future Value: ₹${data.future_value}</b></p>
+    `;
+}
+</script>
+
+</body>
+</html>
