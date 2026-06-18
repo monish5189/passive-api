@@ -37,3 +37,14 @@
   ],
   "contact":"monish5189@github"
 }
+{"path":"/api/loan-emi","method":"GET","price":"$0.005"},
+{"path":"/api/gst-calculator","method":"GET","price":"$0.003"},
+{"path":"/api/email-validator","method":"GET","price":"$0.002"},
+{"path":"/api/profit-margin","method":"GET","price":"$0.003"},
+{"path":"/api/roi-calculator","method":"GET","price":"$0.003"},
+{"path":"/api/qr-generator","method":"GET","price":"$0.005"}
+{"path":"/api/url-shortener","method":"GET","price":"$0.002"},
+{"path":"/api/loan-affordability","method":"GET","price":"$0.003"},
+{"path":"/api/fuel-cost","method":"GET","price":"$0.003"},
+{"path":"/api/sip-calculator","method":"GET","price":"$0.005"},
+{"path":"/api/currency-format","method":"GET","price":"$0.002"}
