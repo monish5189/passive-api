@@ -1049,3 +1049,69 @@ async def loan_emi(
         "years": years,
         "emi": round(emi, 2)
     }
+
+@app.get("/api/gst-calculator", tags=["Finance"])
+async def gst_calculator(
+    amount: float,
+    gst_rate: float = 18
+):
+    gst = amount * gst_rate / 100
+
+    return {
+        "base_amount": amount,
+        "gst_rate": gst_rate,
+        "gst_amount": round(gst, 2),
+        "total_amount": round(amount + gst, 2)
+    }
+import re
+
+@app.get("/api/email-validator", tags=["Utilities"])
+async def email_validator(email: str):
+    pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
+    return {
+        "email": email,
+        "valid": bool(re.match(pattern, email))
+    }
+
+@app.get("/api/profit-margin", tags=["Business"])
+async def profit_margin(cost: float, selling_price: float):
+    profit = selling_price - cost
+    margin = (profit / selling_price) * 100 if selling_price else 0
+
+    return {
+        "cost": cost,
+        "selling_price": selling_price,
+        "profit": round(profit, 2),
+        "margin_percent": round(margin, 2)
+    }
+
+@app.get("/api/roi-calculator", tags=["Business"])
+async def roi_calculator(
+    investment: float,
+    return_amount: float
+):
+    roi = ((return_amount - investment) / investment) * 100
+
+    return {
+        "investment": investment,
+        "return_amount": return_amount,
+        "roi_percent": round(roi, 2)
+    }
+
+
+import qrcode
+from fastapi.responses import StreamingResponse
+from io import BytesIO
+
+@app.get("/api/qr-generator", tags=["Utilities"])
+async def qr_generator(text: str):
+    img = qrcode.make(text)
+
+    buf = BytesIO()
+    img.save(buf, format="PNG")
+    buf.seek(0)
+
+    return StreamingResponse(
+        buf,
+        media_type="image/png"
+    )
