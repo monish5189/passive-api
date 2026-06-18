@@ -1234,3 +1234,64 @@ async def compound_interest_advanced(
     }
 
 
+import hashlib
+
+@app.get("/api/url-shortener", tags=["Utilities"])
+async def url_shortener(url: str):
+    short = hashlib.md5(url.encode()).hexdigest()[:8]
+
+    return {
+        "url": url,
+        "short_code": short
+    }
+
+
+@app.get("/api/loan-affordability", tags=["Finance"])
+async def loan_affordability(
+    monthly_income: float,
+    emi_ratio: float = 0.4
+):
+    max_emi = monthly_income * emi_ratio
+
+    return {
+        "monthly_income": monthly_income,
+        "recommended_max_emi": round(max_emi, 2)
+    }
+
+@app.get("/api/fuel-cost", tags=["Utilities"])
+async def fuel_cost(
+    distance_km: float,
+    mileage_kmpl: float,
+    fuel_price: float
+):
+    fuel_used = distance_km / mileage_kmpl
+    cost = fuel_used * fuel_price
+
+    return {
+        "fuel_used_liters": round(fuel_used, 2),
+        "trip_cost": round(cost, 2)
+    }
+
+@app.get("/api/sip-calculator", tags=["Finance"])
+async def sip_calculator(
+    monthly_investment: float,
+    annual_return: float,
+    years: int
+):
+    r = annual_return / 12 / 100
+    n = years * 12
+
+    fv = monthly_investment * (((1 + r) ** n - 1) / r) * (1 + r)
+
+    return {
+        "future_value": round(fv, 2)
+    }
+
+@app.get("/api/currency-format", tags=["Utilities"])
+async def currency_format(amount: float):
+    return {
+        "indian": f"₹{amount:,.2f}",
+        "usd": f"${amount:,.2f}"
+    }
+
+
